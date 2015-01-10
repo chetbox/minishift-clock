@@ -8,12 +8,18 @@ def show_time(number_of_minishifts, offset):
 	width = 8 * number_of_minishifts
 	ms = minishift.Minishift(minishift.MCP2210Interface(0x04d8, 0xf517), width)
 
-	while (True):
+	try:
+		while (True):
+			for i in range(width):
+				ms.canvas[i] = 0
+				ms.canvas.write_text(offset, time.strftime('%H:%M'))
+				ms.update()
+				time.sleep(1)
+	except (KeyboardInterrupt, SystemExit):
+		# clear the display
 		for i in range(width):
 			ms.canvas[i] = 0
-		ms.canvas.write_text(offset, time.strftime('%H:%M'))
 		ms.update()
-		time.sleep(1)
 
 if __name__ == '__main__':
 	arg_parser = ArgumentParser(description='Show a clock on your Minishift')

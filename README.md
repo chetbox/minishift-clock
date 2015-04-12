@@ -7,7 +7,7 @@ A digital clock for your Minishift
 
 	$ python clock.py NUMBER_OF_MINISHIFTS [--offset LEFT_PADDING]
 
-## Installatiom
+## Installation
 
 	$ sudo pip install cython minishift-python
 
